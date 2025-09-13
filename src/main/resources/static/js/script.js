@@ -21,5 +21,4 @@ function criar() {
     body: JSON.stringify({ nome, prontuario })
   })
   .then(res => res.json())
-  .then(data => alert("Paciente criado com ID: " + data.id));
 }
