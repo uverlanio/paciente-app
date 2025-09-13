@@ -1,109 +1,174 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Roboto, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Segoe UI", Roboto, sans-serif;
 }
 
 /* Fundo suave */
 body {
-    background-color: #f6f9f8;
-    color: #333;
-    line-height: 1.6;
-    padding: 40px;
+	background-color: #f6f9f8;
+	color: #333;
+	line-height: 1.6;
+	padding: 40px;
 }
 
 /* Títulos */
-h1, h2 {
-    color: #2e4a42;
-    margin-bottom: 15px;
-    font-weight: 600;
+h1,
+h2 {
+	color: #2e4a42;
+	margin-bottom: 15px;
+	font-weight: 600;
 }
 
 h1 {
-    font-size: 2rem;
-    margin-top: 0;
+	font-size: 2rem;
+	margin-top: 0;
+}
+
+p {
+	text-align: center;
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-top: 30px;
+	font-size: 1.5rem;
+	margin-top: 30px;
 }
 
-/* Inputs e textarea */
-input[type="text"], textarea {
-    width: 100%;
-    max-width: 500px;
-    padding: 12px;
-    margin: 10px 0 20px 0;
-    border: 1px solid #cfd8d6;
-    border-radius: 8px;
-    background-color: #fff;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+/* Inputs */
+input[type="text"] {
+	width: 100%;
+	max-width: 500px;
+	padding: 12px;
+	margin: 10px 0 20px 0;
+	border: 1px solid #cfd8d6;
+	border-radius: 8px;
+	background-color: #fff;
+	font-size: 1rem;
+	transition: border-color 0.3s ease;
 }
 
-input:focus, textarea:focus {
-    border-color: #5a9e91;
-    outline: none;
-    box-shadow: 0 0 5px rgba(90, 158, 145, 0.2);
+/* Textarea (separado) */
+textarea {
+	width: 100%;
+	max-width: 500px;
+	padding: 12px;
+	margin: 10px 0 20px 0;
+	border: 1px solid #cfd8d6;
+	border-radius: 8px;
+	background-color: #fff;
+	font-size: 1rem;
+	transition: border-color 0.3s ease;
+	height: 500px;
+	/* Aplica a altura apenas ao textarea */
+}
+
+input:focus,
+textarea:focus {
+	border-color: #5a9e91;
+	outline: none;
+	box-shadow: 0 0 5px rgba(90, 158, 145, 0.2);
 }
 
 /* Botões */
 button {
-    background-color: #5a9e91;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s;
+	background-color: #5a9e91;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 500;
+	transition: background-color 0.3s ease, transform 0.2s;
 }
 
 button:hover {
-    background-color: #4b867b;
-    transform: scale(1.03);
+	background-color: #4b867b;
+	transform: scale(1.03);
 }
 
-/* Área de resultado */
+/* A div de resultado será invisível por padrão */
 #resultado {
-    margin-top: 20px;
-    padding: 15px;
-    max-width: 600px;
-    background-color: #ffffff;
-    border: 1px solid #dfe6e4;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    min-height: 50px;
+	margin-top: 20px;
+	min-height: 50px;
+}
+
+/* A nova classe que adiciona a borda e o fundo visível */
+.resultado-visivel {
+	padding: 15px;
+	background-color: #ffffff;
+	border: 1px solid #dfe6e4;
+	border-radius: 10px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Classes para mensagens */
+.sucesso {
+	color: #388e3c;
+	font-weight: bold;
+}
+
+.erro {
+	color: #d32f2f;
+	font-weight: bold;
 }
 
 /* Espaçamento geral */
-body > * {
-    margin-bottom: 10px;
+body>* {
+	margin-bottom: 10px;
 }
 
 .form-wrapper {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+	max-width: 600px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
 
-    .form-wrapper h1,
-    .form-wrapper h2 {
-      text-align: center;
-    }
+.form-wrapper h1,
+.form-wrapper h2 {
+	text-align: center;
+}
 
-    .form-wrapper button {
-      width: 100%;
-    }
+.form-wrapper button {
+	width: 100%;
+}
 
-    #resultado {
-      margin: 20px auto;
-    }
+#resultado {
+	margin: 20px auto;
+}
 
+#edicaoPaciente {
+	margin-top: 30px;
+}
+
+/* Estilo para os botões da tela inicial */
+.btn-pequeno {
+	width: 250px;
+	display: block;
+	margin: 30px auto;
+}
+
+/* ... seu código CSS existente ... */
+
+/* Novo contêiner para os botões */
+.btn-group {
+	display: flex;
+	justify-content: center;
+	/* Centraliza o grupo de botões */
+	align-items: center;
+	gap: 10px;
+	/* Adiciona um espaço entre os botões */
+	margin: 10px auto;
+	/* Mantém a margem para o grupo */
+}
+
+/* Garante que os botões dentro do grupo não ocupem 100% da largura */
+.btn-group button {
+	margin-left: 20px;
+	width: auto;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar e Editar Prontuário</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="form-wrapper">
+    <h1>Buscar Prontuário</h1>
+    <input type="text" id="busca" placeholder="ID ou parte do nome">
+    <div class="btn-group">
+        <button onclick="buscar()">Buscar</button>
+        <a href="home.html">
+            <button type="button">Voltar para Home</button>
+        </a>
+    </div>
+    <div id="resultado"></div>
+    <div id="edicaoPaciente" style="display: none;">
+        <h2>Editar Prontuário</h2>
+        <input type="text" id="nomeEditavel" placeholder="Nome do paciente">
+        <textarea id="prontuarioEditavel" placeholder="Prontuário"></textarea>
+        <div id="resultadoEdicao"></div>
+        <div class="btn-group">
+            <button onclick="atualizar()">Salvar</button>
+            <a href="home.html">
+                <button type="button">Voltar</button>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="../js/script.js"></script>
+</body>
+</html>
