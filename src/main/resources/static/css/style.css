@@ -84,3 +84,26 @@ button:hover {
 body > * {
     margin-bottom: 10px;
 }
+
+.form-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-wrapper h1,
+    .form-wrapper h2 {
+      text-align: center;
+    }
+
+    .form-wrapper button {
+      width: 100%;
+    }
+
+    #resultado {
+      margin: 20px auto;
+    }
+
