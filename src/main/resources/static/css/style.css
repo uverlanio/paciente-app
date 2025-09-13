@@ -1,0 +1,86 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Fundo suave */
+body {
+    background-color: #f6f9f8;
+    color: #333;
+    line-height: 1.6;
+    padding: 40px;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #2e4a42;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+}
+
+/* Inputs e textarea */
+input[type="text"], textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #5a9e91;
+    outline: none;
+    box-shadow: 0 0 5px rgba(90, 158, 145, 0.2);
+}
+
+/* Botões */
+button {
+    background-color: #5a9e91;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background-color: #4b867b;
+    transform: scale(1.03);
+}
+
+/* Área de resultado */
+#resultado {
+    margin-top: 20px;
+    padding: 15px;
+    max-width: 600px;
+    background-color: #ffffff;
+    border: 1px solid #dfe6e4;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    min-height: 50px;
+}
+
+/* Espaçamento geral */
+body > * {
+    margin-bottom: 10px;
+}
