@@ -144,29 +144,41 @@ function login() {
         })
     })
     .then(res => {
-        // If the response is a success (status 2xx), return the response itself.
-        // We will not try to parse JSON from it.
         if (res.ok) {
             return res;
         }
 
-        // If the response is not a success, we'll try to get the error message text.
-        // This avoids the "Unexpected end of JSON input" error on failed logins.
         return res.text().then(text => {
             throw new Error(text || "Erro ao fazer login. Tente novamente.");
         });
     })
     .then(() => {
-        // If we reach this block, the login was successful.
-        // The previous .then() already handled the HTTP status code.
+        // Login bem-sucedido: Armazena a flag de login
+        localStorage.setItem('loggedIn', 'true');
+
+        msgBox.innerHTML = '✅ Login realizado com sucesso! Redirecionando...';
         msgBox.classList.add("success");
         msgBox.style.display = 'block';
         window.location.href = "home.html";
     })
     .catch(err => {
-        // This catches any error, whether it's from the network, the API, or the promise chain.
-        window.location.href = "login.html";
+        // Login falhou: Remove qualquer flag de login e redireciona
+        localStorage.removeItem('loggedIn');
+
+        msgBox.innerHTML = `❌ Falha no login`;
         msgBox.classList.add("error");
         msgBox.style.display = 'block';
+
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 3000); // Redireciona para login.html após 3 segundos.
     });
+}
+
+// Adicione esta função ao seu arquivo script.js
+function verificarLogin() {
+    const loggedIn = localStorage.getItem('loggedIn');
+    if (loggedIn !== 'true') {
+        window.location.href = 'login.html';
+    }
 }
