@@ -10,8 +10,8 @@ function buscar() {
   msgBox.style.display = 'none';
 
   if (!termo) {
-    msgBox.style.display = 'block'; // Mostra a div apenas para a mensagem de erro
-    msgBox.innerHTML = `<p class="erro">⚠️ Digite um ID ou nome para buscar.</p>`;
+    //msgBox.style.display = 'block'; // Mostra a div apenas para a mensagem de erro
+    //msgBox.innerHTML = `<p class="erro">⚠️ Digite um ID ou nome para buscar.</p>`;
     edicaoBox.style.display = "none";
     return;
   }
@@ -24,12 +24,9 @@ function buscar() {
       return res.json();
     })
     .then(data => {
-      pacienteAtualId = data.id;
       msgBox.style.display = 'block'; // Mostra a div #resultado com o conteúdo
       msgBox.innerHTML = `
-        <h3>${data.nome}</h3>
-        <p>${data.prontuario}</p>
-        <small>Última atualização: ${new Date(data.ultimaAtualizacao).toLocaleString()}</small>
+        <small class='alinharDataAtualizacao'>Última atualização: ${new Date(data.ultimaAtualizacao).toLocaleString()}</small>
       `;
 
       // Preenche os campos de edição

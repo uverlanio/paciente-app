@@ -33,7 +33,7 @@ p {
 
 h2 {
 	font-size: 1.5rem;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 /* Inputs */
@@ -91,8 +91,8 @@ button:hover {
 
 /* A div de resultado será invisível por padrão */
 #resultado {
-	margin-top: 20px;
-	min-height: 50px;
+	margin-top: 30px;
+	text-align: right;
 }
 
 /* A nova classe que adiciona a borda e o fundo visível */
@@ -143,7 +143,7 @@ body>* {
 }
 
 #edicaoPaciente {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 /* Estilo para os botões da tela inicial */
@@ -152,8 +152,6 @@ body>* {
 	display: block;
 	margin: 30px auto;
 }
-
-/* ... seu código CSS existente ... */
 
 /* Novo contêiner para os botões */
 .btn-group {
