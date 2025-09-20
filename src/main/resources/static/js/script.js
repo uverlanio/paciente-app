@@ -10,8 +10,6 @@ function buscar() {
   msgBox.style.display = 'none';
 
   if (!termo) {
-    //msgBox.style.display = 'block'; // Mostra a div apenas para a mensagem de erro
-    //msgBox.innerHTML = `<p class="erro">⚠️ Digite um ID ou nome para buscar.</p>`;
     edicaoBox.style.display = "none";
     return;
   }
@@ -116,5 +114,59 @@ function criar() {
       // Adiciona a classe e exibe a mensagem de erro
       msgBox.classList.add("resultado-visivel");
       msgBox.innerHTML = `<p class="erro">❌ Falha ao criar.<br>${err.message}</p>`;
+    });
+}
+
+function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const msgBox = document.getElementById("message");
+
+    msgBox.innerHTML = '';
+    msgBox.style.display = 'none';
+    msgBox.classList.remove("error", "success");
+
+    if (!username || !password) {
+        msgBox.innerHTML = '⚠️ Usuário e senha são obrigatórios.';
+        msgBox.classList.add("error");
+        msgBox.style.display = 'block';
+        return;
+    }
+
+    fetch("/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome: username,
+            senha: password
+        })
+    })
+    .then(res => {
+        // If the response is a success (status 2xx), return the response itself.
+        // We will not try to parse JSON from it.
+        if (res.ok) {
+            return res;
+        }
+
+        // If the response is not a success, we'll try to get the error message text.
+        // This avoids the "Unexpected end of JSON input" error on failed logins.
+        return res.text().then(text => {
+            throw new Error(text || "Erro ao fazer login. Tente novamente.");
+        });
+    })
+    .then(() => {
+        // If we reach this block, the login was successful.
+        // The previous .then() already handled the HTTP status code.
+        msgBox.classList.add("success");
+        msgBox.style.display = 'block';
+        window.location.href = "home.html";
+    })
+    .catch(err => {
+        // This catches any error, whether it's from the network, the API, or the promise chain.
+        window.location.href = "login.html";
+        msgBox.classList.add("error");
+        msgBox.style.display = 'block';
     });
 }
