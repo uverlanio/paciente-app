@@ -34,7 +34,7 @@ function buscar() {
     })
     .catch(err => {
       msgBox.style.display = 'block'; // Mostra a div #resultado com a mensagem de erro
-      msgBox.innerHTML = `<p class="erro">❌ ${err.message}</p>`;
+      msgBox.innerHTML = `<p class="erro">❌ Falha ao buscar.</p>`;
       edicaoBox.style.display = "none";
     });
 }
@@ -70,7 +70,7 @@ function atualizar() {
       msgBoxEdicao.innerHTML = `<p class="sucesso">✅ Paciente <b>${paciente.nome}</b> atualizado com sucesso!</p>`;
     })
     .catch(err => {
-      msgBoxEdicao.innerHTML = `<p class="erro">❌ Falha ao atualizar.<br>${err.message}</p>`;
+      msgBoxEdicao.innerHTML = `<p class="erro">❌ Falha ao atualizar.</p>`;
     });
 }
 
@@ -113,7 +113,7 @@ function criar() {
     .catch(err => {
       // Adiciona a classe e exibe a mensagem de erro
       msgBox.classList.add("resultado-visivel");
-      msgBox.innerHTML = `<p class="erro">❌ Falha ao criar.<br>${err.message}</p>`;
+      msgBox.innerHTML = `<p class="erro">❌ Falha ao criar.</p>`;
     });
 }
 
@@ -165,13 +165,13 @@ function login() {
         // Login falhou: Remove qualquer flag de login e redireciona
         localStorage.removeItem('loggedIn');
 
-        msgBox.innerHTML = `❌ Falha no login`;
+        msgBox.innerHTML = `❌ Falha no login.`;
         msgBox.classList.add("error");
         msgBox.style.display = 'block';
 
         setTimeout(() => {
             window.location.href = "login.html";
-        }, 3000); // Redireciona para login.html após 3 segundos.
+        }, 4000); // Redireciona para login.html após 3 segundos.
     });
 }
 
@@ -181,4 +181,9 @@ function verificarLogin() {
     if (loggedIn !== 'true') {
         window.location.href = 'login.html';
     }
+}
+
+function logoff(){
+    window.location.href = 'login.html';
+    localStorage.removeItem('loggedIn');
 }
