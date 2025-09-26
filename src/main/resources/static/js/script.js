@@ -22,6 +22,7 @@ function buscar() {
       return res.json();
     })
     .then(data => {
+      pacienteAtualId = data.id;
       msgBox.style.display = 'block'; // Mostra a div #resultado com o conteúdo
       msgBox.innerHTML = `
         <small class='alinharDataAtualizacao'>Última atualização: ${new Date(data.ultimaAtualizacao).toLocaleString()}</small>
@@ -40,6 +41,7 @@ function buscar() {
 }
 
 function atualizar() {
+
   const nome = document.getElementById("nomeEditavel").value.trim();
   const prontuario = document.getElementById("prontuarioEditavel").value.trim();
   const msgBoxEdicao = document.getElementById("resultadoEdicao"); // Nova referência
