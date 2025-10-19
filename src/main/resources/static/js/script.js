@@ -30,7 +30,7 @@ function buscar() {
 
       // Preenche os campos de edição
       document.getElementById("nomeEditavel").value = data.nome;
-      document.getElementById("prontuarioEditavel").value = data.prontuario;
+      preencherProntuario(data.prontuario);
       edicaoBox.style.display = "block";
     })
     .catch(err => {
@@ -43,10 +43,9 @@ function buscar() {
 function atualizar() {
 
   const nome = document.getElementById("nomeEditavel").value.trim();
-  const prontuario = document.getElementById("prontuarioEditavel").value.trim();
-  const msgBoxEdicao = document.getElementById("resultadoEdicao"); // Nova referência
+  const prontuario = document.getElementById("prontuarioEditavel").innerHTML.trim();
+  const msgBoxEdicao = document.getElementById("resultadoEdicao");
 
-  // Limpa a caixa de mensagem antes de uma nova atualização
   msgBoxEdicao.innerHTML = '';
 
   if (!nome || !prontuario || !pacienteAtualId) {
@@ -188,4 +187,19 @@ function verificarLogin() {
 function logoff(){
     window.location.href = 'login.html';
     localStorage.removeItem('loggedIn');
+}
+
+function execComando(event, comando) {
+    event.preventDefault();
+    document.execCommand(comando, false, null);
+    document.getElementById("prontuarioEditavel").focus(); // Garante que o foco permaneça
+}
+
+function preencherProntuario(htmlContent) {
+    const editor = document.getElementById("prontuarioEditavel");
+    if (htmlContent) {
+        editor.innerHTML = htmlContent;
+    } else {
+        editor.innerHTML = '';
+    }
 }

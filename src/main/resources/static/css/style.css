@@ -280,6 +280,36 @@ input:focus {
 /* logoff button */
 .btn-top-right {
     position: absolute;
-    top: 20px; /* Distância do topo */
-    right: 20px; /* Distância da direita */
+    top: 20px;
+    right: 20px;
+}
+
+/* ESTILO DA ÁREA DE EDIÇÃO (div contenteditable) */
+.prontuario-editor {
+    /* Estas linhas dão a aparência de um textarea */
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+
+    /* BORDA VISÍVEL */
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    background-color: #fff;
+
+    /* ESTA É A CHAVE PARA A VISIBILIDADE: A altura mínima */
+    min-height: 500px;
+
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* SIMULAÇÃO DO PLACEHOLDER */
+.prontuario-editor:empty:before {
+    content: attr(placeholder);
+    color: #aaa;
+    display: block;
 }

@@ -11,15 +11,15 @@
     <input type="text" id="busca" placeholder="ID ou parte do nome">
     <div class="btn-group">
         <button onclick="buscar()">Buscar</button>
-        <a href="home.html">
-            <button type="button">Voltar</button>
-        </a>
     </div>
     <div id="resultado"></div>
     <div id="edicaoPaciente" style="display: none;">
         <h2>Editar Prontuário</h2>
         <input type="text" id="nomeEditavel" placeholder="Nome do paciente">
-        <textarea id="prontuarioEditavel" placeholder="Prontuário"></textarea>
+        <div class="btn-group" style="margin-left: 62%;">
+            <button type="button" onmousedown="execComando(event, 'bold')" title="Negrito"><i>Negrito</i></button>
+        </div>
+        <div id="prontuarioEditavel" class="prontuario-editor" contenteditable="true"></div>
         <div id="resultadoEdicao"></div>
         <div class="btn-group">
             <button onclick="atualizar()">Salvar</button>
