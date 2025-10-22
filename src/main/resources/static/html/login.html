@@ -5,7 +5,7 @@
     <title>Sistema de Prontuários - Login</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body onload="checkAuth()">
 
 <div class="login-container">
     <h2>Login</h2>
@@ -20,6 +20,6 @@
     <button onclick="login()">Entrar</button>
     <div id="message" class="message-box"></div>
 </div>
-<script src="../js/script.js"></script>
+<script src="../js/checkAuth.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <title>Buscar e Editar Prontuário</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body onload="checkAuth()">
 <div class="form-wrapper">
     <h1>Buscar Prontuário</h1>
     <input type="text" id="busca" placeholder="ID ou parte do nome">
@@ -32,7 +32,8 @@
         <button onclick="logoff()">Sair</button>
     </div>
 </div>
-<script src="../js/script.js"></script>
-<script>verificarLogin();</script>
+<script src="../js/checkAuth.js"></script>
+<script src="../js/buscar.js"></script>
+<script src="../js/atualizar.js"></script>
 </body>
 </html>
