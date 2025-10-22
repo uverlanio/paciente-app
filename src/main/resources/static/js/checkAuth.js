@@ -73,11 +73,14 @@ function checkAuth() {
     if (currentTime > loginData.expiresAt) {
 
         localStorage.removeItem('loginStatus');
-        alert("Sua sessão expirou. Faça login novamente.");
         window.location.href = 'login.html';
     }
 }
 
 function logoff(){
     window.location.href = 'login.html';
+    localStorage.setItem('loginStatus', JSON.stringify({
+                loggedIn: false,
+                expiresAt: 0
+            }));
 }
