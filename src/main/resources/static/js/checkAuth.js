@@ -34,7 +34,7 @@ function login() {
         });
     })
     .then(() => {
-        const expirationTime = Date.now() + 2 * 60 * 1000;
+        const expirationTime = Date.now() + (8 * 60 * 60 * 1000);
 
         localStorage.setItem('loginStatus', JSON.stringify({
             loggedIn: true,
