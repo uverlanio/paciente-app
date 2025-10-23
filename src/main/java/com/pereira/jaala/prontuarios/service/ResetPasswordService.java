@@ -7,18 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
-public class LoginService {
+public class ResetPasswordService {
 
     @Autowired
     LoginRepository loginRepository;
 
-    public LoginService(LoginRepository loginRepository) {
+    public ResetPasswordService(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
     @Transactional
-    public Login findUsuario(UsuarioDTO usuarioDTO){
-        return loginRepository.findByNomeAndSenha(usuarioDTO.getNome(), usuarioDTO.getSenha());
+    public Login findUsuarioWithoutSenha(UsuarioDTO usuarioDTO){
+
+        Login reset = new Login();
+
+        if(Objects.nonNull(usuarioDTO.getNovaSenha())){
+            reset = loginRepository.findByNome(usuarioDTO.getNome());
+            if(Objects.nonNull(reset))
+                loginRepository.updateNewPassword(reset.getNome(), usuarioDTO.getNovaSenha());
+        }
+
+        return reset;
     }
 }

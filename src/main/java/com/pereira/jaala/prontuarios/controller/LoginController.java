@@ -18,7 +18,6 @@ import java.util.Objects;
 @RequestMapping("/api")
 public class LoginController {
 
-    @Autowired
     LoginService loginService;
 
     public LoginController(LoginService loginService) {
@@ -26,7 +25,7 @@ public class LoginController {
     }
 
     @PostMapping
-    ResponseEntity<?> login(@Valid @RequestBody UsuarioDTO usuarioDTO){
+    ResponseEntity<?> login(@RequestBody UsuarioDTO usuarioDTO){
         try {
             Login usuarioLogin = loginService.findUsuario(usuarioDTO);
             return Objects.nonNull(usuarioLogin) ? ResponseEntity.status(HttpStatus.ACCEPTED).build() : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
