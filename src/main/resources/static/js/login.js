@@ -65,7 +65,7 @@ function reset(){
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
-    const campoDeEntrada = document.getElementById('username');
+    const campoDeEntrada = document.getElementById('password');
     const botaoEntrar = document.getElementById('botao-entrar');
 
     username.addEventListener('keyup', (e) => {

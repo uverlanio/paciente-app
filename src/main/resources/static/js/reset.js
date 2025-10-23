@@ -55,3 +55,16 @@ function reset() {
         }, 10000);
     });
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+
+    const campoDeEntrada = document.getElementById('newpassword');
+    const botaoEntrar = document.getElementById('botao-entrar');
+
+    username.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === 13) {
+            e.preventDefault();
+            botaoEntrar.focus();
+        }
+    });
+});
