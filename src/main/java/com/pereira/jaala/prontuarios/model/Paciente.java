@@ -1,5 +1,6 @@
 package com.pereira.jaala.prontuarios.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +27,6 @@ public class Paciente {
     @Size(max = 5000)
     private String prontuario;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime ultimaAtualizacao;
 }

@@ -33,9 +33,11 @@ function buscar() {
       edicaoBox.style.display = "block";
     })
     .catch(err => {
-      alert(err);
       msgBox.style.display = 'block';
       msgBox.innerHTML = `<p class="erro">❌ Falha ao buscar.</p>`;
       edicaoBox.style.display = "none";
+      setTimeout(() => {
+                  window.location.href = "criar.html";
+              }, 3000);
     });
 }

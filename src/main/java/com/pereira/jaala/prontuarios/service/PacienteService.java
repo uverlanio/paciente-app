@@ -28,10 +28,14 @@ public class PacienteService {
     }
 
     public PacienteResponse buscarPorIdOuNome(String termo) {
-        Optional<Paciente> porId = repository.findById(termo);
-        if (porId.isPresent()) return toResponse(porId.get());
 
-        List<Paciente> porNome = repository.findByNomeContainingIgnoreCase(termo);
+        List<Paciente> porNome = List.of();
+
+        Optional<Paciente> porId = repository.findById(termo);
+
+        if (porId.isPresent()){
+            porNome = repository.findByNomeContainingIgnoreCase(termo);
+        }
         return porNome.isEmpty() ? null : toResponse(porNome.get(0));
     }
 
