@@ -75,3 +75,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("botao-entrar").click();
+    }
+});
