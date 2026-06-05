@@ -38,3 +38,15 @@ function criar() {
       msgBox.innerHTML = `<p class="erro">❌ Falha ao criar.</p>`;
     });
 }
+
+const containsProntuarioNovo = document.getElementById('prontuarioNovo');
+const botaoSalvar = document.getElementById('botao-salvar');
+
+containsProntuarioNovo.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === 13) {
+    if (!containsProntuarioNovo.matches(':hover')) {
+      e.preventDefault();
+      botaoSalvar.click();
+    }
+  }
+})

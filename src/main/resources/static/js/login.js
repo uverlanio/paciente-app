@@ -76,10 +76,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-document.addEventListener("keydown", function(event) {
+const containsPassword = document.getElementById('password');
+const botaoEntrar = document.getElementById('botao-entrar');
 
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("botao-entrar").click();
+containsPassword.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === 13) {
+        e.preventDefault();
+        botaoEntrar.click()
     }
-});
+})

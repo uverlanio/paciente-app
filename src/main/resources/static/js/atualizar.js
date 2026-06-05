@@ -47,3 +47,16 @@ function preencherProntuario(htmlContent) {
         editor.innerHTML = '';
     }
 }
+
+const prontuarioEditavel = document.getElementById('prontuarioEditavel');
+const botaoSalvar = document.getElementById('botao-salvar');
+
+
+prontuarioEditavel.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === 13) {
+        if (!prontuarioEditavel.matches(':hover')) {
+            e.preventDefault();
+            botaoSalvar.click();
+        }
+    }
+})
