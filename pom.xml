@@ -14,7 +14,7 @@
 
 	<groupId>com.pereira.jaala.prontuarios</groupId>
 	<artifactId>prontuario-app</artifactId>
-	<version>1.4.3</version>
+	<version>1.4.4</version>
 	<packaging>jar</packaging>
 
 	<name>PacienteApp</name>
