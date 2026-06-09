@@ -10,3 +10,4 @@ EXPOSE 8080
 #docker tag prontuario-app-1.4.4:latest uverdocker/prontuario-app:1.4.4
 #docker push uverdocker/prontuario-app:latest
 
+#docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts

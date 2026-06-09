@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+            stage('1. Clonar Código') {
+                steps {
+                    cleanWs()
+                    git url: 'file://172.17.0.1/c/projetos/paciente-app', branch: 'master'
+                }
+            }
+
+        stage('2. Build & Testes (CI)') {
+            steps {
+                echo 'Compilando e testando com Maven...'
+                sh './mvnw clean package'
+            }
+        }
+
+        stage('3. Criar Imagem Docker (CD)') {
+            steps {
+                echo 'Criando a imagem Docker da API...'
+                sh 'docker build -t prontuario-app-1.4.4:latest .'
+            }
+        }
+
+        stage('4. Deploy Local (Rodar API)') {
+            steps {
+                echo 'Parando container antigo (se houver) e subindo o novo...'
+
+                // Remove o container antigo para não dar conflito de nome/porta
+                sh 'docker rm -f prontuario-app-1.4.4 || true'
+
+                // Roda a nova versão da API mapeando a porta 8080 para o seu Windows
+                sh 'docker run -d -p 8080:8080 --name -name prontuario-app prontuario-app-1.4.4:latest'
+
+                echo '--- CI/CD Finalizado! API rodando em http://localhost:8080 ---'
+                }
+            }
+        }
+}
