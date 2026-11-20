@@ -1,94 +1,49 @@
-# 🩺 PacienteApp
+# PacienteApp
 
-Aplicação web desenvolvida com **Spring Boot 3.5.5**, **Java 21** e **MongoDB**, utilizando o padrão **MVC**. O sistema permite o cadastro, busca, atualização e visualização de prontuários médicos de pacientes, com interface web simples em HTML, CSS e JavaScript.
+Aplicação web desenvolvida com **Spring Boot 3.5.5**, **Java 21** e **MySQL**, utilizando Spring Data JPA e o padrão MVC. O sistema permite cadastrar, buscar, atualizar e visualizar prontuários de pacientes, com interface em HTML, CSS e JavaScript.
 
----
+## Tecnologias
 
-## 🚀 Tecnologias Utilizadas
-
-- **Java 21**
-- **Spring Boot 3.5.5**
-- **Spring Data MongoDB**
-- **MongoDB**
-- **HTML, CSS, JS** (frontend estático em `/static`)
-- **Maven**
-
----
-
-## 📁 Estrutura do Projeto
-
-src/
-└── main/
-├── java/
-│   └── com/
-│       └── seuprojeto/
-│           ├── controller/
-│           ├── service/
-│           ├── model/
-│           ├── dto/
-│           └── repository/
-└── resources/
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── html/
-└── application.properties
-
----
-
-## 🧠 Funcionalidades
-
-- 🔍 **Buscar paciente** por ID ou parte do nome
-- 📝 **Visualizar prontuário** e data/hora da última modificação
-- ✏️ **Atualizar prontuário**
-- ➕ **Cadastrar novo paciente**
-
----
-
-## 🗃️ Modelo de Dados
-
-**Paciente**
-- `id` (String, tamanho 3)
-- `nome` (String, até 50 caracteres)
-- `prontuario` (String, até 5000 caracteres)
-- `ultimaAtualizacao` (Data e hora da última modificação)
-
----
-
-## 📦 Requisitos
-
-- Java 21 
-- MongoDB em execução local (`mongodb://localhost:27017/seubanco`)
+- Java 21 e Spring Boot 3.5.5
+- Spring Data JPA
+- MySQL Server 8
+- MySQL Workbench 8.0.47 (opcional, para administrar o banco)
 - Maven
 
----
+## Requisitos
 
-## ▶️ Como Executar
+- JDK 21
+- MySQL Server 8 em execução
+- MySQL Workbench 8.0.47 (opcional)
 
-1. Clone o repositório:
-   via bash
-   git clone https://github.com/seuusuario/paciente-app.git
-   cd paciente-app
-   
-2. Execute o projeto:
+## Configuração e execução
+
+1. No MySQL Workbench, conecte ao servidor e crie o banco:
+
+   ```sql
+   CREATE DATABASE db_prontuarios
+       CHARACTER SET utf8mb4
+       COLLATE utf8mb4_unicode_ci;
+   ```
+
+2. Configure as credenciais do MySQL. Por padrão, a aplicação usa `localhost:3306`, o banco `db_prontuarios` e o usuário `root`, sem senha. É possível sobrescrever os valores com as variáveis de ambiente `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` e `DB_PASSWORD`.
+
+3. Execute a aplicação:
+
+   ```sh
    mvn spring-boot:run
+   ```
 
-3. Acessa a interface web:
-   http://localhost:8080/html/home.html
+   O Hibernate cria ou atualiza as tabelas `pacientes` e `usuario` no banco configurado.
 
-📄 API REST
-POST /api/pacientes
-Cria um novo paciente.
-GET /api/pacientes/{termo}
-Busca paciente por ID ou parte do nome.
-PUT /api/pacientes/{id}
-Atualiza os dados de um paciente existente.
+4. Acesse a interface em `http://localhost:8080/html/home.html`.
 
-💡 Observações
+Os registros existentes no MongoDB não são copiados automaticamente para o MySQL; a migração desses dados deve ser feita separadamente antes de desativar o banco antigo.
 
-- A interface web está localizada em src/main/resources/static/html/index.html.
-- A aplicação não utiliza frameworks JS externos, apenas JavaScript puro.
+## API REST
 
+- `POST /api/pacientes`: cria um paciente.
+- `GET /api/pacientes/{termo}`: busca paciente.
+- `PUT /api/pacientes/{id}`: atualiza um paciente.
 
-🛠️ Autor
-Projeto desenvolvido por Uverlanio Mauricio — sinta-se à vontade para contribuir ou sugerir melhorias!
+Os arquivos da interface ficam em `src/main/resources/static`.
