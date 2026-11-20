@@ -47,3 +47,12 @@ Os registros existentes no MongoDB não são copiados automaticamente para o MyS
 - `PUT /api/pacientes/{id}`: atualiza um paciente.
 
 Os arquivos da interface ficam em `src/main/resources/static`.
+
+## Docker
+#docker build -t prontuario-app-2.0.0 .
+#docker run -d -p 8080:8080 --name prontuario-app prontuario-app-2.0.0
+#docker login
+#docker tag prontuario-app-2.0.0:latest uverdocker/prontuario-app:2.0.0
+#docker push uverdocker/prontuario-app:latest
+
+#docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts

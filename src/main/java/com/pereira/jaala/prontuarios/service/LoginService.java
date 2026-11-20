@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class LoginService {
@@ -25,7 +27,8 @@ public class LoginService {
         log.debug("Finding user with name: {}", usuarioDTO.getNome());
 
         Login logged = loginRepository.findByNomeAndSenha(usuarioDTO.getNome(), usuarioDTO.getSenha());
-        log.debug("User found: {}", logged.getNome());
+        Optional.ofNullable(logged)
+                .ifPresent(usuario -> log.debug("User found: {}", usuario.getNome()));
 
         return logged;
     }
