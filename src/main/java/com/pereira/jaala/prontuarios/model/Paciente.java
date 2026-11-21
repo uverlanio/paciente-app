@@ -29,7 +29,7 @@ public class Paciente {
     @Size(max = 50)
     private String nome;
 
-    @Column(length = 5000)
+    @Column(columnDefinition = "LONGTEXT")
     @Size(max = 5000)
     private String prontuario;
 
