@@ -40,11 +40,24 @@ Aplicação web desenvolvida com **Spring Boot 3.5.5**, **Java 21** e **MySQL**,
 
 Os registros existentes no MongoDB não são copiados automaticamente para o MySQL; a migração desses dados deve ser feita separadamente antes de desativar o banco antigo.
 
+## Interface e foto de perfil
+
+A interface fica em `src/main/resources/static`, organizada por responsabilidade:
+
+- `html/`: páginas do sistema.
+- `css/tokens.css`: cores e valores reutilizáveis; `base.css`, `components.css` e `pages.css` concentram estilos globais, componentes e layouts de página.
+- `js/`: scripts das páginas e funcionalidades compartilhadas, como autenticação e perfil.
+
+Após entrar, o profissional pode selecionar uma foto JPEG ou PNG de até 5 MB pelo botão **Alterar foto**. A imagem é armazenada na tabela `perfil_profissional`, separada dos dados de autenticação, e aparece nas páginas autenticadas; até o primeiro envio, o avatar exibe as iniciais.
+
 ## API REST
 
 - `POST /api/pacientes`: cria um paciente.
 - `GET /api/pacientes/{termo}`: busca paciente.
 - `PUT /api/pacientes/{id}`: atualiza um paciente.
+- `POST /api/perfil/foto`: envia a foto do perfil da sessão autenticada.
+- `GET /api/perfil/foto`: retorna a foto do perfil da sessão autenticada.
+- `POST /api/perfil/logout`: encerra a sessão.
 
 Os arquivos da interface ficam em `src/main/resources/static`.
 

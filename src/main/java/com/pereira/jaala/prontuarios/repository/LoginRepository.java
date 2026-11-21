@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LoginRepository extends JpaRepository<Login, String> {
+public interface LoginRepository extends JpaRepository<Login, Long> {
 
     Login findByNomeAndSenha(String usuario, String senha);
 

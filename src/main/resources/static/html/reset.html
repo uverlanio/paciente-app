@@ -1,25 +1,50 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Prontuários - Login</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="theme-color" content="#FAF8F5">
+    <title>Redefinir senha | Prontuário</title>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
-<body onload="checkAuth()">
-
-<div class="reset-container">
-    <h2>Redefinir senha</h2>
-    <div class="input-group">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário">
-    </div>
-    <div class="input-group">
-        <label for="newpassword">Nova senha:</label>
-        <input type="password" id="newpassword" name="newpassword" placeholder="Digite sua nova senha">
-    </div>
-    <button id="botao-enviar" onclick="reset()">Enviar</button>
-    <div id="message" class="message-box"></div>
-</div>
+<body>
+<main class="reset-page">
+    <section class="auth-story">
+        <a class="brand" href="login.html">
+            <span class="brand-mark" aria-hidden="true">P</span>
+            <span>Prontuário</span>
+        </a>
+        <div class="auth-copy">
+            <p class="eyebrow">Acesso seguro</p>
+            <h1>Vamos recuperar seu acesso.</h1>
+            <p>Informe seu usuário e escolha uma nova senha para continuar.</p>
+        </div>
+        <p class="auth-note">Seus dados continuam protegidos.</p>
+    </section>
+    <section class="auth-panel">
+        <div class="auth-form-wrap">
+            <p class="eyebrow">Redefinição</p>
+            <h2>Nova senha</h2>
+            <p class="auth-subtitle">Preencha os campos abaixo.</p>
+            <form id="reset-form" class="form-grid" method="post" action="/api/reset">
+                <div class="field">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="nome" placeholder="Digite seu usuário" autocomplete="username" required>
+                </div>
+                <div class="field">
+                    <label for="newpassword">Nova senha</label>
+                    <input type="password" id="newpassword" name="novaSenha" placeholder="Digite sua nova senha" autocomplete="new-password" required>
+                </div>
+                <button class="button" id="botao-enviar" type="submit">Salvar nova senha</button>
+            </form>
+            <p id="message" class="feedback" role="status" aria-live="polite"></p>
+            <a class="auth-link" href="login.html">Voltar para o login</a>
+        </div>
+    </section>
+</main>
 <script src="../js/reset.js"></script>
 </body>
 </html>

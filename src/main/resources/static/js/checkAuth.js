@@ -1,17 +1,33 @@
-function checkAuth() {
-    const statusString = localStorage.getItem('loginStatus');
+async function checkAuth() {
+    const statusString = localStorage.getItem("loginStatus");
+    let loginData;
 
-    if (!statusString) {
-        window.location.href = 'login.html';
+    try {
+        loginData = statusString ? JSON.parse(statusString) : null;
+    } catch (error) {
+        localStorage.removeItem("loginStatus");
+    }
+
+    if (loginData && loginData.loggedIn === true && Date.now() <= loginData.expiresAt) {
         return;
     }
 
-    const loginData = JSON.parse(statusString);
-    const currentTime = Date.now();
+    localStorage.removeItem("loginStatus");
+    try {
+        const response = await fetch("/api/perfil/sessao", { cache: "no-store" });
+        if (!response.ok) {
+            throw new Error("Sessão não autenticada.");
+        }
 
-    if (currentTime > loginData.expiresAt) {
-
-        localStorage.removeItem('loginStatus');
-        window.location.href = 'login.html';
+        const usuario = await response.json();
+        localStorage.setItem("loginStatus", JSON.stringify({
+            loggedIn: true,
+            nome: usuario.nome,
+            expiresAt: Date.now() + (8 * 60 * 60 * 1000)
+        }));
+        window.dispatchEvent(new Event("auth-ready"));
+    } catch (error) {
+        localStorage.removeItem("loginStatus");
+        window.location.href = "login.html";
     }
 }

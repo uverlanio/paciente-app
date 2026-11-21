@@ -2,28 +2,63 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Criar Novo Prontuário</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF8F5">
+    <title>Novo prontuário | Prontuário</title>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
 <body onload="checkAuth()">
-<div class="form-wrapper">
-    <h2>Criar Novo Prontuário</h2>
-    <input type="text" id="nomeNovo" placeholder="Nome">
-    <textarea id="prontuarioNovo" placeholder="Prontuário"></textarea>
-    <div id="resultado"></div>
-    <div class="btn-group">
-        <div class="btn-pequeno">
-            <button id="botao-salvar" onclick="criar()">Salvar</button>
-            <a href="home.html">
-                <button type="button">Voltar</button>
-            </a>
+<header class="app-header">
+    <a class="brand" href="home.html" aria-label="Prontuário - início">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>Prontuário</span>
+    </a>
+    <div class="header-actions">
+        <div class="profile">
+            <div class="profile-avatar" aria-label="Foto de perfil profissional">
+                <span data-profile-initials aria-hidden="true">P</span>
+                <img class="profile-avatar-image" data-profile-image alt="Foto de perfil profissional" hidden>
+            </div>
+            <div class="profile-copy">
+                <span class="profile-name" data-profile-name>Profissional</span>
+                <span class="profile-role">Psicóloga</span>
+                <button class="profile-photo-button" type="button" data-profile-select>Alterar foto</button>
+                <input class="visually-hidden" type="file" accept="image/jpeg,image/png" data-profile-file aria-label="Selecionar foto de perfil">
+                <p class="profile-feedback" data-profile-feedback aria-live="polite"></p>
+            </div>
         </div>
+        <button class="button button-quiet" type="button" onclick="logoff()">Sair</button>
     </div>
-    <div class="btn-top-right">
-        <button onclick="logoff()">Sair</button>
+</header>
+<main class="page-content">
+    <div class="page-heading">
+        <p class="eyebrow">Novo registro</p>
+        <h1>Criar prontuário</h1>
+        <p>Preencha os dados para registrar um novo paciente.</p>
     </div>
-</div>
+    <section class="surface-card">
+        <div class="form-grid">
+            <div class="field">
+                <label for="nomeNovo">Nome do paciente</label>
+                <input type="text" id="nomeNovo" placeholder="Nome completo">
+            </div>
+            <div class="field">
+                <label for="prontuarioNovo">Prontuário</label>
+                <textarea id="prontuarioNovo" placeholder="Escreva as informações do atendimento"></textarea>
+            </div>
+        </div>
+        <div id="resultado" class="feedback" aria-live="polite"></div>
+        <div class="form-actions">
+            <a class="button button-secondary" href="home.html">Voltar</a>
+            <button class="button" id="botao-salvar" type="button" onclick="criar()">Salvar prontuário</button>
+        </div>
+    </section>
+</main>
 <script src="../js/checkAuth.js"></script>
+<script src="../js/profile.js"></script>
 <script src="../js/criar.js"></script>
 <script src="../js/logoff.js"></script>
 </body>

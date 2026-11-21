@@ -1,31 +1,50 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Prontuários - Login</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="theme-color" content="#FAF8F5">
+    <title>Entrar | Prontuário</title>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
 <body>
-
-<div class="login-container">
-    <h2>Login</h2>
-    <div class="input-group">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário">
-    </div>
-    <div class="input-group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" placeholder="Digite sua senha">
-    </div>
-    <div>
-        <button id="botao-entrar" onclick="login()">Entrar</button>
-    </div>
-    <br />
-    <div>
-        <button id="reset" onclick="reset()">Recuperar senha</button>
-    </div>
-    <div id="message" class="message-box"></div>
-</div>
+<main class="login-page">
+    <section class="auth-story">
+        <a class="brand" href="login.html">
+            <span class="brand-mark" aria-hidden="true">P</span>
+            <span>Prontuário</span>
+        </a>
+        <div class="auth-copy">
+            <p class="eyebrow">Cuidado em cada detalhe</p>
+            <h1>Seu trabalho, em um espaço mais leve.</h1>
+            <p>Organize os prontuários dos seus pacientes com mais tranquilidade e atenção.</p>
+        </div>
+        <p class="auth-note">Um ambiente pensado para acompanhar o seu cuidado.</p>
+    </section>
+    <section class="auth-panel">
+        <div class="auth-form-wrap">
+            <p class="eyebrow">Bem-vinda de volta</p>
+            <h2>Acesse sua conta</h2>
+            <p class="auth-subtitle">Entre para continuar seu trabalho.</p>
+            <form id="login-form" class="form-grid" method="post" action="/api">
+                <div class="field">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="nome" placeholder="Digite seu usuário" autocomplete="username" required>
+                </div>
+                <div class="field">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+                </div>
+                <button class="button" id="botao-entrar" type="submit">Entrar</button>
+            </form>
+            <p id="message" class="feedback" role="status" aria-live="polite"></p>
+            <a class="auth-link" href="reset.html">Esqueceu sua senha?</a>
+        </div>
+    </section>
+</main>
 <script src="../js/login.js"></script>
 </body>
 </html>

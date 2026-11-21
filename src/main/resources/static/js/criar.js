@@ -1,52 +1,44 @@
-function criar() {
-  const nome = document.getElementById("nomeNovo").value.trim();
-  const prontuario = document.getElementById("prontuarioNovo").value.trim();
-  const msgBox = document.getElementById("resultado");
+async function criar() {
+    const nomeField = document.getElementById("nomeNovo");
+    const prontuarioField = document.getElementById("prontuarioNovo");
+    const msgBox = document.getElementById("resultado");
+    const botaoSalvar = document.getElementById("botao-salvar");
+    const nome = nomeField.value.trim();
+    const prontuario = prontuarioField.value.trim();
 
-  msgBox.innerHTML = '';
-  msgBox.classList.remove("resultado-visivel");
+    mostrarResultado(msgBox, "");
+    if (!nome || !prontuario) {
+        mostrarResultado(msgBox, "Nome e prontuário são obrigatórios.", "error");
+        return;
+    }
 
-  if (!nome || !prontuario) {
-    msgBox.innerHTML = `<p class="erro">⚠️ Nome e prontuário são obrigatórios.</p>`;
-    msgBox.classList.add("resultado-visivel");
-    return;
-  }
-
-  fetch("/api/pacientes", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nome, prontuario })
-  })
-    .then(res => {
-      if (!res.ok) {
-        return res.text().then(textoErro => {
-          throw new Error(textoErro || "Erro ao criar paciente");
+    botaoSalvar.disabled = true;
+    try {
+        const response = await fetch("/api/pacientes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, prontuario })
         });
-      }
-      return res.json();
-    })
-    .then(paciente => {
+        if (!response.ok) {
+            const detalhe = await response.text();
+            throw new Error(detalhe || "Não foi possível criar o prontuário.");
+        }
 
-      msgBox.classList.add("resultado-visivel");
-      msgBox.innerHTML = `<p class="sucesso">✅ Paciente <b>${paciente.nome}</b> criado com sucesso!</p>`;
-
-      document.getElementById("nomeNovo").value = "";
-      document.getElementById("prontuarioNovo").value = "";
-    })
-    .catch(err => {
-      msgBox.classList.add("resultado-visivel");
-      msgBox.innerHTML = `<p class="erro">❌ Falha ao criar.</p>`;
-    });
+        const paciente = await response.json();
+        mostrarResultado(msgBox, `Prontuário de ${paciente.nome} criado com sucesso.`, "success");
+        nomeField.value = "";
+        prontuarioField.value = "";
+    } catch (error) {
+        mostrarResultado(msgBox, error.message || "Não foi possível conectar. Tente novamente.", "error");
+    } finally {
+        botaoSalvar.disabled = false;
+    }
 }
 
-const containsProntuarioNovo = document.getElementById('prontuarioNovo');
-const botaoSalvar = document.getElementById('botao-salvar');
-
-containsProntuarioNovo.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === 13) {
-    if (!containsProntuarioNovo.matches(':hover')) {
-      e.preventDefault();
-      botaoSalvar.click();
+function mostrarResultado(elemento, mensagem, tipo) {
+    elemento.textContent = mensagem;
+    elemento.classList.remove("error", "success");
+    if (tipo) {
+        elemento.classList.add(tipo);
     }
-  }
-})
+}

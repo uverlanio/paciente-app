@@ -5,7 +5,9 @@ import com.pereira.jaala.prontuarios.dto.PacienteResponse;
 import com.pereira.jaala.prontuarios.model.Paciente;
 import com.pereira.jaala.prontuarios.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +21,9 @@ public class PacienteService {
 
     public PacienteResponse salvar(PacienteRequest request) {
         Paciente paciente = new Paciente();
-        paciente.setId(request.getId());
+        paciente.setId(request.getId() == null || request.getId().isBlank()
+                ? UUID.randomUUID().toString()
+                : request.getId());
         paciente.setNome(request.getNome());
         paciente.setProntuario(request.getProntuario());
         paciente.setUltimaAtualizacao(LocalDateTime.now());
@@ -28,14 +32,22 @@ public class PacienteService {
     }
 
     public PacienteResponse buscarPorIdOuNome(String termo) {
+        Optional<Paciente> porId = repository.findById(termo);
+        if (porId.isPresent()) {
+            return toResponse(porId.get());
+        }
 
         List<Paciente> porNome = repository.findByNomeContainingIgnoreCase(termo);
 
-        return porNome.isEmpty() ? null : toResponse(porNome.get(0));
+        if (porNome.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado.");
+        }
+        return toResponse(porNome.get(0));
     }
 
     public PacienteResponse atualizar(String id, PacienteRequest request) {
-        Paciente paciente = repository.findById(id).orElseThrow();
+        Paciente paciente = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado."));
         paciente.setNome(request.getNome());
         paciente.setProntuario(request.getProntuario());
         paciente.setUltimaAtualizacao(LocalDateTime.now());

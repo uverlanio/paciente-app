@@ -2,37 +2,83 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Buscar e Editar Prontuário</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF8F5">
+    <title>Buscar prontuário | Prontuário</title>
+    <link rel="stylesheet" href="../css/tokens.css?v=202611211635">
+    <link rel="stylesheet" href="../css/base.css?v=202611211635">
+    <link rel="stylesheet" href="../css/components.css?v=202611211635">
+    <link rel="stylesheet" href="../css/pages.css?v=202611211635">
 </head>
 <body onload="checkAuth()">
-<div class="form-wrapper">
-    <h1>Buscar Prontuário</h1>
-    <input type="text" id="busca" placeholder="ID ou parte do nome">
-    <div class="btn-group">
-        <button onclick="buscar()">Buscar</button>
-    </div>
-    <div id="resultado"></div>
-    <div id="edicaoPaciente" style="display: none;">
-        <h2>Editar Prontuário</h2>
-        <input type="text" id="nomeEditavel" placeholder="Nome do paciente">
-        <div id="prontuarioEditavel" class="prontuario-editor" contenteditable="true"></div>
-        <div id="resultadoEdicao"></div>
-        <div class="btn-group" style="margin-left: 62%;">
-            <button type="button" onmousedown="execComando(event, 'bold')" title="Negrito"><i>Negrito</i></button>
+<header class="app-header">
+    <a class="brand" href="home.html" aria-label="Prontuário - início">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>Prontuário</span>
+    </a>
+    <div class="header-actions">
+        <div class="profile">
+            <div class="profile-avatar" aria-label="Foto de perfil profissional">
+                <span data-profile-initials aria-hidden="true">P</span>
+                <img class="profile-avatar-image" data-profile-image alt="Foto de perfil profissional" hidden>
+            </div>
+            <div class="profile-copy">
+                <span class="profile-name" data-profile-name>Profissional</span>
+                <span class="profile-role">Psicóloga</span>
+                <button class="profile-photo-button" type="button" data-profile-select>Alterar foto</button>
+                <input class="visually-hidden" type="file" accept="image/jpeg,image/png" data-profile-file aria-label="Selecionar foto de perfil">
+                <p class="profile-feedback" data-profile-feedback aria-live="polite"></p>
+            </div>
         </div>
-        <div class="btn-group">
-            <button id="botao-salvar" onclick="atualizar()">Salvar</button>
-            <a href="home.html">
-                <button type="button">Voltar</button>
-            </a>
+        <button class="button button-quiet" type="button" onclick="logoff()">Sair</button>
+    </div>
+</header>
+<main class="page-content">
+    <div class="page-heading">
+        <p class="eyebrow">Acompanhamento</p>
+        <h1>Buscar prontuário</h1>
+        <p>Pesquise pelo identificador ou por parte do nome do paciente.</p>
+    </div>
+    <section class="surface-card" aria-label="Buscar prontuário">
+        <div class="form-grid search-layout">
+            <div class="field">
+                <label for="busca">ID ou nome do paciente</label>
+                <input type="text" id="busca" placeholder="Digite o ID ou parte do nome">
+            </div>
+            <div class="form-actions">
+                <button class="button" type="button" onclick="buscar()">Buscar prontuário</button>
+            </div>
         </div>
-    </div>
-    <div class="btn-top-right">
-        <button onclick="logoff()">Sair</button>
-    </div>
-</div>
+        <div id="resultado" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section id="edicaoPaciente" class="surface-card" aria-labelledby="editor-title" hidden>
+        <div class="page-heading">
+            <p class="eyebrow">Prontuário encontrado</p>
+            <h2 id="editor-title">Editar prontuário</h2>
+        </div>
+        <div class="form-grid">
+            <div class="field">
+                <label for="nomeEditavel">Nome do paciente</label>
+                <input type="text" id="nomeEditavel" placeholder="Nome do paciente">
+            </div>
+            <div class="field">
+                <label for="prontuarioEditavel">Prontuário</label>
+                <div id="prontuarioEditavel" class="prontuario-editor" contenteditable="true" placeholder="Conteúdo do prontuário"></div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="button button-secondary" type="button" onmousedown="execComando(event, 'bold')" title="Negrito"><strong>B</strong> Negrito</button>
+        </div>
+        <div id="resultadoEdicao" class="feedback" aria-live="polite"></div>
+        <div class="form-actions">
+            <a class="button button-secondary" href="home.html">Voltar</a>
+            <button class="button" id="botao-salvar" type="button" onclick="atualizar()">Salvar alterações</button>
+        </div>
+    </section>
+</main>
 <script src="../js/checkAuth.js"></script>
+<script src="../js/profile.js"></script>
 <script src="../js/buscar.js"></script>
 <script src="../js/atualizar.js"></script>
 <script src="../js/logoff.js"></script>

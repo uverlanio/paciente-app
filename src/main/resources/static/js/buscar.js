@@ -1,43 +1,46 @@
 window.pacienteAtualId = null;
 
-function buscar() {
+async function buscar() {
+    const termo = document.getElementById("busca").value.trim();
+    const msgBox = document.getElementById("resultado");
+    const edicaoBox = document.getElementById("edicaoPaciente");
 
-  const termo = document.getElementById("busca").value.trim();
-  const msgBox = document.getElementById("resultado");
-  const edicaoBox = document.getElementById("edicaoPaciente");
+    mostrarResultadoBusca(msgBox, "");
+    edicaoBox.hidden = true;
+    window.pacienteAtualId = null;
 
-  msgBox.innerHTML = '';
-  msgBox.style.display = 'none';
+    if (!termo) {
+        mostrarResultadoBusca(msgBox, "Informe o ID ou o nome do paciente.", "error");
+        return;
+    }
 
-  if (!termo) {
-    edicaoBox.style.display = "none";
-    return;
-  }
+    try {
+        const response = await fetch(`/api/pacientes/${encodeURIComponent(termo)}`);
+        if (response.status === 404) {
+            throw new Error("Nenhum prontuário encontrado para essa busca.");
+        }
+        if (!response.ok) {
+            throw new Error("Não foi possível buscar o prontuário. Tente novamente.");
+        }
 
-  fetch(`/api/pacientes/${termo}`)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("Paciente não encontrado");
-      }
-      return res.json();
-    })
-    .then(data => {
-      pacienteAtualId = data.id;
-      msgBox.style.display = 'block';
-      msgBox.innerHTML = `
-        <small class='alinharDataAtualizacao'>Última atualização: ${new Date(data.ultimaAtualizacao).toLocaleString()}</small>
-      `;
+        const paciente = await response.json();
+        window.pacienteAtualId = paciente.id;
+        const atualizado = paciente.ultimaAtualizacao || "Data indisponível";
+        mostrarResultadoBusca(msgBox, `Última atualização: ${atualizado}`, "success");
+        document.getElementById("nomeEditavel").value = paciente.nome;
+        preencherProntuario(paciente.prontuario);
+        document.getElementById("resultadoEdicao").textContent = "";
+        document.getElementById("resultadoEdicao").classList.remove("error", "success");
+        edicaoBox.hidden = false;
+    } catch (error) {
+        mostrarResultadoBusca(msgBox, error.message || "Não foi possível conectar. Tente novamente.", "error");
+    }
+}
 
-      document.getElementById("nomeEditavel").value = data.nome;
-      preencherProntuario(data.prontuario);
-      edicaoBox.style.display = "block";
-    })
-    .catch(err => {
-      msgBox.style.display = 'block';
-      msgBox.innerHTML = `<p class="erro">❌ Falha ao buscar.</p>`;
-      edicaoBox.style.display = "none";
-      setTimeout(() => {
-                  window.location.href = "criar.html";
-              }, 3000);
-    });
+function mostrarResultadoBusca(elemento, mensagem, tipo) {
+    elemento.textContent = mensagem;
+    elemento.classList.remove("error", "success");
+    if (tipo) {
+        elemento.classList.add(tipo);
+    }
 }

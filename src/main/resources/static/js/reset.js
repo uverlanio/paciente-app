@@ -1,70 +1,44 @@
-function reset() {
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("newpassword").value.trim();
-    const msgBox = document.getElementById("message");
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("reset-form");
+    const usernameField = document.getElementById("username");
+    const passwordField = document.getElementById("newpassword");
+    const message = document.getElementById("message");
+    const submitButton = document.getElementById("botao-enviar");
 
-    msgBox.innerHTML = '';
-    msgBox.style.display = 'none';
-    msgBox.classList.remove("error", "success");
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+        message.textContent = "";
+        message.className = "feedback";
 
-    if (!username || !password) {
-        msgBox.innerHTML = '⚠️ Usuário e a nova senha são obrigatórios.';
-        msgBox.classList.add("error");
-        msgBox.style.display = 'block';
-        return;
+        const nome = usernameField.value.trim();
+        const novaSenha = passwordField.value.trim();
+        if (!nome || !novaSenha) {
+            showMessage("Preencha seu usuário e sua nova senha.", "error");
+            return;
+        }
+
+        submitButton.disabled = true;
+        try {
+            const response = await fetch("/api/reset", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, senha: "", novaSenha })
+            });
+            if (!response.ok) {
+                throw new Error("Não foi possível redefinir a senha. Confira os dados e tente novamente.");
+            }
+
+            showMessage("Senha atualizada com sucesso. Você já pode entrar com a nova senha.", "success");
+            form.reset();
+        } catch (error) {
+            showMessage(error.message || "Não foi possível conectar. Tente novamente.", "error");
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.classList.add(type);
     }
-
-    fetch("/api/reset", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nome: username,
-            senha: '',
-            novaSenha: password
-        })
-    })
-    .then(res => {
-        if (res.ok) {
-            return res;
-        }
-
-        return res.text().then(text => {
-            throw new Error(text || "Erro ao tentar alterar a senha. Tente novamente.");
-        });
-    })
-    .then(() => {
-
-        msgBox.innerHTML = '✅ Senha atualizada com sucesso! Redirecionando...';
-        msgBox.classList.add("success");
-        msgBox.style.display = 'block';
-
-        localStorage.removeItem('loginStatus');
-        window.location.href = 'login.html';
-
-    })
-    .catch(err => {
-
-        msgBox.innerHTML = `❌ Não foi possível alterar a senha.`;
-        msgBox.classList.add("error");
-        msgBox.style.display = 'block';
-
-        setTimeout(() => {
-            window.location.href = "home.html";
-        }, 10000);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-
-    const campoDeEntrada = document.getElementById('newpassword');
-    const botaoEntrar = document.getElementById('botao-entrar');
-
-    username.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter' || e.key === 13) {
-            e.preventDefault();
-            botaoEntrar.focus();
-        }
-    });
 });

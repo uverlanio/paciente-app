@@ -5,9 +5,11 @@ function atualizar() {
   const msgBoxEdicao = document.getElementById("resultadoEdicao");
 
   msgBoxEdicao.innerHTML = '';
+  msgBoxEdicao.classList.remove("error", "success");
 
   if (!nome || !prontuario || !pacienteAtualId) {
-    msgBoxEdicao.innerHTML = `<p class="erro">⚠️ Nome e prontuário são obrigatórios.</p>`;
+    msgBoxEdicao.textContent = "Nome e prontuário são obrigatórios.";
+    msgBoxEdicao.classList.add("error");
     return;
   }
 
@@ -25,11 +27,12 @@ function atualizar() {
       return res.json();
     })
     .then(paciente => {
-      msgBoxEdicao.classList.add("resultado-visivel");
-      msgBoxEdicao.innerHTML = `<p class="sucesso">✅ Paciente <b>${paciente.nome}</b> atualizado com sucesso!</p>`;
+      msgBoxEdicao.textContent = `Prontuário de ${paciente.nome} atualizado com sucesso.`;
+      msgBoxEdicao.classList.add("success");
     })
     .catch(err => {
-      msgBoxEdicao.innerHTML = `<p class="erro">❌ Falha ao atualizar.</p>`;
+      msgBoxEdicao.textContent = err.message || "Não foi possível atualizar o prontuário.";
+      msgBoxEdicao.classList.add("error");
     });
 }
 
@@ -47,16 +50,3 @@ function preencherProntuario(htmlContent) {
         editor.innerHTML = '';
     }
 }
-
-const prontuarioEditavel = document.getElementById('prontuarioEditavel');
-const botaoSalvar = document.getElementById('botao-salvar');
-
-
-prontuarioEditavel.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === 13) {
-        if (!prontuarioEditavel.matches(':hover')) {
-            e.preventDefault();
-            botaoSalvar.click();
-        }
-    }
-})

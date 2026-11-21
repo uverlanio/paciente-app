@@ -2,28 +2,61 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sistem de Prontuários</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF8F5">
+    <title>Início | Prontuário</title>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
 </head>
 <body onload="checkAuth()">
-<div class="form-wrapper">
-    <h1>Bem-vinda Psicóloga Jaala Pereira !</h1>
-    <p>Escolha uma opção para continuar: </p>
-    <div class="btn-pequeno">
-        <a href="criar.html">
-            <button>Criar Prontuário</button>
+<header class="app-header">
+    <a class="brand" href="home.html" aria-label="Prontuário - início">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>Prontuário</span>
+    </a>
+    <div class="header-actions">
+        <div class="profile">
+            <div class="profile-avatar" aria-label="Foto de perfil profissional">
+                <span data-profile-initials aria-hidden="true">P</span>
+                <img class="profile-avatar-image" data-profile-image alt="Foto de perfil profissional" hidden>
+            </div>
+            <div class="profile-copy">
+                <span class="profile-name" data-profile-name>Profissional</span>
+                <span class="profile-role">Psicóloga</span>
+                <button class="profile-photo-button" type="button" data-profile-select>Alterar foto</button>
+                <input class="visually-hidden" type="file" accept="image/jpeg,image/png" data-profile-file aria-label="Selecionar foto de perfil">
+                <p class="profile-feedback" data-profile-feedback aria-live="polite"></p>
+            </div>
+        </div>
+        <button class="button button-quiet" type="button" onclick="logoff()">Sair</button>
+    </div>
+</header>
+
+<main class="page-content dashboard">
+    <section class="welcome-panel">
+        <p class="eyebrow">Painel do profissional</p>
+        <h1>Olá, <span data-profile-name>Profissional</span>.</h1>
+        <p>Um espaço tranquilo para organizar o cuidado e acompanhar cada prontuário.</p>
+    </section>
+
+    <h2 class="section-title">O que você precisa fazer?</h2>
+    <div class="action-grid">
+        <a class="action-card" href="criar.html">
+            <span class="action-icon" aria-hidden="true">+</span>
+            <strong>Criar prontuário</strong>
+            <span>Registre um novo atendimento com segurança e clareza.</span>
+        </a>
+        <a class="action-card" href="atualizar.html">
+            <span class="action-icon" aria-hidden="true">&#8594;</span>
+            <strong>Buscar e editar</strong>
+            <span>Encontre um paciente e atualize as informações do prontuário.</span>
         </a>
     </div>
-    <div class="btn-pequeno">
-        <a href="atualizar.html">
-            <button >Editar Prontuário</button>
-        </a>
-    </div>
-    <div class="btn-top-right">
-        <button onclick="logoff()">Sair</button>
-    </div>
-</div>
+</main>
 <script src="../js/checkAuth.js"></script>
+<script src="../js/profile.js"></script>
 <script src="../js/logoff.js"></script>
 </body>
 </html>
