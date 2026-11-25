@@ -81,6 +81,16 @@ A foto deve ser JPEG ou PNG válida, com até 5 MB e dimensões máximas de 4096
 
 ## Docker
 
+#docker login
+#docker build -t prontuario-app-2.2.2 .
+#docker run -d -p 8080:8080 --name prontuario-app prontuario-app-2.2.2
+#docker tag prontuario-app-2.2.2:latest uverdocker/prontuario-app:2.2.2
+#docker push uverdocker/prontuario-app:2.2.2
+
+#docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts
+
+#gerar token de acesso pessoal no github: https://hub.docker.com/settings/security
+
 O `Dockerfile` usa uma imagem Eclipse Temurin 21 e expõe a porta `8080`. Para gerar e executar a imagem localmente:
 
 ```sh
@@ -133,14 +143,3 @@ Execute os testes automatizados com:
 ```sh
 ./mvnw test
 ```
-
-## Docker
-#docker login
-#docker build -t prontuario-app-2.2.2 .
-#docker run -d -p 8080:8080 --name prontuario-app prontuario-app-2.2.2
-#docker tag prontuario-app-2.2.2:latest uverdocker/prontuario-app:2.2.2
-#docker push uverdocker/prontuario-app:2.2.2
-
-#docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts
-
-#gerar token de acesso pessoal no github: https://hub.docker.com/settings/security
