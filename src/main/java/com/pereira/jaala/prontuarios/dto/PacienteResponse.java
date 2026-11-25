@@ -1,5 +1,6 @@
 package com.pereira.jaala.prontuarios.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -10,6 +11,8 @@ public class PacienteResponse {
     private String id;
     private String nome;
     private String prontuario;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime ultimaAtualizacao;
 
     public String getId() {

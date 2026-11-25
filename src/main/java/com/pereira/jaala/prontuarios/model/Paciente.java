@@ -30,7 +30,6 @@ public class Paciente {
     private String nome;
 
     @Column(columnDefinition = "LONGTEXT")
-    @Size(max = 5000)
     private String prontuario;
 
     @Column(name = "ultima_atualizacao")
