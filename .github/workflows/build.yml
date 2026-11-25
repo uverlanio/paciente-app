@@ -30,6 +30,16 @@ jobs:
       - name: Build with Maven
         run: ./mvnw clean package -DskipTests
 
+      - name: Get generated JAR name
+        id: jar
+        run: |
+          jar_file=$(find target -maxdepth 1 -type f -name '*.jar' ! -name '*.original' -print -quit)
+          if [ -z "$jar_file" ]; then
+            echo "No executable JAR found in target/." >&2
+            exit 1
+          fi
+          echo "name=$(basename "$jar_file" .jar)" >> "$GITHUB_OUTPUT"
+
       # 4. Configurar o Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -47,4 +57,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: uverdocker/prontuario-app:2.1.2
+          tags: uverdocker/prontuario-app:${{ steps.jar.outputs.name }}
