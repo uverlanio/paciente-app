@@ -37,6 +37,14 @@
     background: var(--color-sage-light);
 }
 
+.button-danger {
+    background: var(--color-danger);
+}
+
+.button-danger:hover {
+    background: #873A33;
+}
+
 .button-quiet {
     min-height: 40px;
     padding: 8px 14px;

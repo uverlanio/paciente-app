@@ -28,4 +28,10 @@ public class PacienteController {
     public ResponseEntity<PacienteResponse> atualizar(@PathVariable String id, @RequestBody PacienteRequest request) {
         return ResponseEntity.ok(service.atualizar(id, request));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable String id) {
+        service.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -36,6 +36,33 @@ function atualizar() {
     });
 }
 
+async function excluir() {
+  const nome = document.getElementById("nomeEditavel").value.trim();
+  if (!pacienteAtualId || !window.confirm(`Deseja excluir permanentemente o prontuário de ${nome}?`)) {
+    return;
+  }
+
+  const resultado = document.getElementById("resultadoEdicao");
+  resultado.textContent = "";
+  resultado.classList.remove("error", "success");
+
+  try {
+    const response = await fetch(`/api/pacientes/${encodeURIComponent(pacienteAtualId)}`, {
+      method: "DELETE"
+    });
+    if (!response.ok) {
+      throw new Error("Não foi possível excluir o prontuário. Tente novamente.");
+    }
+
+    document.getElementById("edicaoPaciente").hidden = true;
+    pacienteAtualId = null;
+    mostrarResultadoBusca(document.getElementById("resultado"), "Prontuário excluído com sucesso.", "success");
+  } catch (error) {
+    resultado.textContent = error.message || "Não foi possível excluir o prontuário.";
+    resultado.classList.add("error");
+  }
+}
+
 function execComando(event, comando) {
     event.preventDefault();
     document.execCommand(comando, false, null);

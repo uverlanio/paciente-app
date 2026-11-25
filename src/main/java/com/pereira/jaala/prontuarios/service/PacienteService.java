@@ -55,6 +55,12 @@ public class PacienteService {
         return toResponse(paciente);
     }
 
+    public void excluir(String id) {
+        Paciente paciente = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado."));
+        repository.delete(paciente);
+    }
+
     private PacienteResponse toResponse(Paciente paciente) {
         return new PacienteResponse(
                 paciente.getId(),
