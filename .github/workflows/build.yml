@@ -38,7 +38,9 @@ jobs:
             echo "No executable JAR found in target/." >&2
             exit 1
           fi
-          echo "name=$(basename "$jar_file" .jar)" >> "$GITHUB_OUTPUT"
+          jar_name=$(basename "$jar_file" .jar)
+          version=${jar_name#prontuario-app-}
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       # 4. Configurar o Docker Buildx
       - name: Set up Docker Buildx
@@ -57,4 +59,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: uverdocker/prontuario-app:${{ steps.jar.outputs.name }}
+          tags: uverdocker/prontuario-app:${{ steps.jar.outputs.version }}

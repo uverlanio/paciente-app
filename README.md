@@ -107,7 +107,7 @@ O workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) é execu
 
 1. Obtém o código e configura o JDK 21 com cache do Maven.
 2. Executa `./mvnw clean package -DskipTests`.
-3. Identifica o JAR executável gerado em `target/`, configura Docker Buildx, autentica no Docker Hub e constrói/publica a imagem usando o nome do JAR (sem a extensão `.jar`) como tag.
+3. Identifica o JAR executável gerado em `target/`, extrai sua versão, configura Docker Buildx, autentica no Docker Hub e constrói/publica a imagem usando essa versão como tag.
 
 Configure os secrets `DOCKERHUB_USERNAME` e `DOCKERHUB_TOKEN` no repositório GitHub para autenticação no Docker Hub. O build do workflow pula os testes.
 
