@@ -62,10 +62,10 @@ Após entrar, o profissional pode selecionar uma foto JPEG ou PNG de até 5 MB p
 Os arquivos da interface ficam em `src/main/resources/static`.
 
 ## Docker
+#docker login
 #docker build -t prontuario-app-2.1.2 .
 #docker run -d -p 8080:8080 --name prontuario-app prontuario-app-2.1.2
-#docker login
 #docker tag prontuario-app-2.1.2:latest uverdocker/prontuario-app:2.1.2
-#docker push uverdocker/prontuario-app:latest
+#docker push uverdocker/prontuario-app:2.1.2
 
 #docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts
