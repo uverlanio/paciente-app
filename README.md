@@ -69,3 +69,5 @@ Os arquivos da interface ficam em `src/main/resources/static`.
 #docker push uverdocker/prontuario-app:2.1.2
 
 #docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name ci-cd-jenkins jenkins/jenkins:lts
+
+#gerar token de acesso pessoal no github: https://hub.docker.com/settings/security
